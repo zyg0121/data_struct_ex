@@ -192,10 +192,11 @@ int main() {
 					PrintList_L(first_floor);
 				}
 				else if (order1 == 2) {
-					/*int i;
+					int i;
 					puts("Please enter the pos do you want delete:");
 					cin >> i;
-					ListDelete_L(first_floor, i, first_floor.elem[i]);*/
+
+					/*ListDelete_L(first_floor, i, first_floor.elem[i]);*/
 					PrintList_L(first_floor);
 				}
 				else if (order1 == 3) {
