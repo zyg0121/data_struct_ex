@@ -52,8 +52,19 @@ typedef struct LNode {
 	struct LNode *next;
 }LNode,*LinkList;
 
+
+bool InitLinklist(LinkList *L){
+    LinkList p;                        //
+    p=(LNode *)malloc(sizeof(LNode));//扩大线性链表空间
+    if(!p)                            //判断结点是否创建成功，可省略
+        exit(-2);
+    p->next=NULL;
+    *L=p;
+    return true;
+}
+
 bool GetEmem_L(LinkList L,int i,stu_dorm &e) {
-	LNode *p = L->next;
+	LinkList p = L->next;
 	int j = 1;
 	while(p && j<i) {
 		p =  p->next;
@@ -65,54 +76,56 @@ bool GetEmem_L(LinkList L,int i,stu_dorm &e) {
 }
 
 bool ListInsert_L(LinkList &L,int i,stu_dorm e) {
-	LNode *p = L;
+	LinkList p = L;
 	int j = 0;
 	while(p && j<i-1) {
 		p = p->next;
 		++j;
 	}
 	if(!p || j > i-1) return false;
-	LNode *s = (LinkList)malloc(sizeof(LNode));
+	LinkList s = (LinkList)malloc(sizeof(LNode));
 	s->data = e;
 	s->next = p->next;
 	p->next = s;
 	return true;
 }
 
-bool ListDelete_L(LinkList &L,int i,stu_dorm &e) {
-	LNode *p = L;
+bool ListDelete_L(LinkList &L,int i) {
+	LinkList p = L;
 	int j = 0;
 	while(p->next && j < i-1) {
 		p = p->next;
 		++j;
 	}
 	if(!(p->next)||j > i-1) return false;
-	LNode *q = p->next;
+	LinkList q = p->next;
 	p->next = q->next;
-	e = q->data;
 	free(q);
 	return true;
 }
 
-void CreateList_L(LinkList &L,int n) {
-	L = (LinkList)malloc(sizeof(LNode));
-	L->next = NULL;
+void CreateList_L(LinkList *L,int n) {
+	LinkList pi,ptail;
+    ptail=*L;
 	int num, people;
 	double size;
 	int condition;
-	for(int i = n;i > 0;i--) {
-		LNode *p = (LinkList) malloc(sizeof(LNode));
-		cin>>num;
+	printf("Please enter the dorm element(num,size,people,condition(1 or 0):\n");
+    for(int i = 0;i < n;i++)
+    {
+        pi=(LNode *)malloc(sizeof(LNode));
+        cin>>num;
 		cin>>size;
 		cin>>people;
 		cin>>condition;
-		L->data.set_condition(condition);
-		L->data.set_num(num);
-		L->data.set_pople(people);
-		L->data.set_size(size);
-		p->next = L->next;
-		L->next = p;
-	}
+		pi->data.set_condition(condition);
+		pi->data.set_num(num);
+		pi->data.set_pople(people);
+		pi->data.set_size(size);
+        ptail->next=pi;
+        ptail=ptail->next;
+    }
+    pi->next=NULL;
 }
 
 void MergeList_L(LinkList &La,LinkList &Lb,LinkList &Lc) {
@@ -129,10 +142,11 @@ void MergeList_L(LinkList &La,LinkList &Lb,LinkList &Lc) {
 	free(Lb);
 }
 
-void PrintList_L(LinkList &L) {
-	LNode *p = L;
-	printf("SqList(num,size,people,condition):\n");
-	while(p){
+void PrintList_L (LinkList *L) {
+	puts("The rooms :");
+	LinkList p;
+	p =(*L)->next;
+	while(p) {
 		cout<<p->data.get_num()<<' '<<p->data.get_size()<<' '<<p->data.get_people()<<' '<<p->data.get_condition()<<endl;
 		p = p->next;
 	}
@@ -156,15 +170,26 @@ void menu2() {
 int main() {
 	LinkList first_floor;
 	LinkList second_floor;
+	puts("Start initialization...");
+	InitLinklist(&first_floor);
+	InitLinklist(&second_floor);
 	puts("Plese enter the first floor dorm element:");
 	int k;
 	puts("please enter the number of the rooms");
 	cin>>k;
-	CreateList_L(first_floor, k);
+	if(k==0) {
+		puts("No rooms!");
+	} else {
+		CreateList_L(&first_floor, k);
+	}
 	puts("Plese enter the second floor dorm element:");
 	puts("please enter the number of the rooms");
 	cin>>k;
-	CreateList_L(second_floor, k);
+	if(k==0) {
+		puts("No rooms!");
+	} else {
+		CreateList_L(&second_floor, k);
+	}
 	
 	puts("Please enter the order:");
 	int order1,order2;
@@ -189,30 +214,31 @@ int main() {
 					cin >> condition;
 					stu_dorm e(num, size, people, condition);
 					ListInsert_L(first_floor, i, e);
-					PrintList_L(first_floor);
+					PrintList_L(&first_floor);
 				}
 				else if (order1 == 2) {
 					int i;
 					puts("Please enter the pos do you want delete:");
 					cin >> i;
-
-					/*ListDelete_L(first_floor, i, first_floor.elem[i]);*/
-					PrintList_L(first_floor);
+					ListDelete_L(first_floor,i);
+					PrintList_L(&first_floor);
 				}
 				else if (order1 == 3) {
 					int i;
-					/*puts("Please enter the room number do you want to find");
+					puts("Please enter the room number do you want to find");
 					cin>>i;
-					cout<<"The pos is"<<LocateElem_Sq(first_floor,i,compare);*/
+					stu_dorm tmp;
+					GetEmem_L(first_floor,i,tmp);
+					cout<<"The pos is "<<tmp.get_num()<<endl;
 				}
 				else if (order1 == 4) {
-					PrintList_L(first_floor);
+					PrintList_L(&first_floor);
 				}
 				else {
 					puts("ERROR input");
 				}
 			}
-			/*else if(order2==2) {
+			else if(order2==2) {
 				if (order1 == 1) {
 					int i;
 					puts("Please enter the pos do you want insert:");
@@ -226,29 +252,31 @@ int main() {
 					cin >> people;
 					cin >> condition;
 					stu_dorm e(num, size, people, condition);
-					ListInsert_Sq(second_floor, i, e);
-					Output_Sq(second_floor);
+					ListInsert_L(second_floor, i, e);
+					PrintList_L(&second_floor);
 				}
 				else if (order1 == 2) {
 					int i;
 					puts("Please enter the pos do you want delete:");
 					cin >> i;
-					ListDelete_Sq(second_floor, i, second_floor.elem[i]);
-					Output_Sq(second_floor);
+					ListDelete_L(second_floor,i);
+					PrintList_L(&second_floor);
 				}
 				else if (order1 == 3) {
 					int i;
 					puts("Please enter the room number do you want to find");
 					cin>>i;
-					cout<<"The pos is"<<LocateElem_Sq(second_floor,i,compare);
+					stu_dorm tmp;
+					GetEmem_L(second_floor,i,tmp);
+					cout<<"The pos is "<<tmp.get_num()<<endl;
 				}
 				else if (order1 == 4) {
-					Output_Sq(second_floor);
+					PrintList_L(&second_floor);
 				}
 				else {
 					puts("ERROR input");
 				}
-			}*/
+			}
 			else {
 				puts("ERROR input");
 			}
@@ -256,7 +284,7 @@ int main() {
 		else if (order1 == 5) {
 			LinkList all;
 			MergeList_L(first_floor, second_floor, all);
-			PrintList_L(all);
+			PrintList_L(&all);
 		}
 		else {
 			puts("ERROR input");
