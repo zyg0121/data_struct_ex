@@ -54,13 +54,13 @@ typedef struct LNode {
 
 
 bool InitLinklist(LinkList *L){
-    LinkList p;                        //
-    p=(LNode *)malloc(sizeof(LNode));//扩大线性链表空间
-    if(!p)                            //判断结点是否创建成功，可省略
-        exit(-2);
-    p->next=NULL;
-    *L=p;
-    return true;
+	LinkList p;
+	p=(LNode *)malloc(sizeof(LNode));
+	if(!p)
+		exit(-2);
+	p->next=NULL;
+	*L=p;
+	return true;
 }
 
 bool GetEmem_L(LinkList L,int i,stu_dorm &e) {
