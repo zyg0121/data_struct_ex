@@ -2,6 +2,7 @@
 #include <cstring>
 #include <string>
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 class stu_dorm {
