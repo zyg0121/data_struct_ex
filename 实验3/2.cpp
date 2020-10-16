@@ -36,7 +36,7 @@ bool DeleteStack(SqStack* S) {
         return false;
     }
 
-    free((*S).base);
+    free(S->base);
     S->base = NULL;
     S->top = NULL;
     S->stacksize = 0;
@@ -70,17 +70,17 @@ bool GetTop(SqStack S,SElemType *e) {
 }
 
 bool Push(SqStack* S, SElemType e) {
-    if(S == NULL || (*S).base == NULL) {
+    if(S == NULL || S->base == NULL) {
         return false;
     }
     
-    if((*S).top - (*S).base >= (*S).stacksize) {
-        (*S).base = (SElemType*) realloc((*S).base, ((*S).stacksize + STACKINCREMENT) * sizeof(SElemType));
-        if((*S).base == NULL) {
+    if(S->top - S->base >= S->stacksize) {
+        S->base = (SElemType*) realloc(S->base, (S->stacksize + STACKINCREMENT) * sizeof(SElemType));
+        if(S->base == NULL) {
             exit(-2);
         }
-        (*S).top = (*S).base + (*S).stacksize;
-        (*S).stacksize += STACKINCREMENT;
+        S->top = S->base + S->stacksize;
+        S->stacksize += STACKINCREMENT;
     }
     
     *(S->top++) = e;
@@ -89,15 +89,15 @@ bool Push(SqStack* S, SElemType e) {
 }
 
 bool Pop(SqStack* S, SElemType* e) {
-    if(S == NULL || (*S).base == NULL) {
+    if(S == NULL || S->base == NULL) {
         return false;
     }
     
-    if((*S).top == (*S).base) {
+    if(S->top == S->base) {
         return false;
     }
 
-    *e = *(--(*S).top);
+    *e = *(--S->top);
     
     return true;
 }
