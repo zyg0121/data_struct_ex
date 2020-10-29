@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <cstring>
 #include <iostream>
+#include <cstdlib> 
 using namespace std;
 
 const int STACK_INIT_SIZE = 100;

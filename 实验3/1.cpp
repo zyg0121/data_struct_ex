@@ -106,7 +106,6 @@ int main() {
         printf("前方剩余%d人\n",QueueLength(bank));
         GetHead(bank,account);
         if(account==0) cout<<"无下一位"<<endl;
-        cout<<"下一位:"<<account<<endl;
         switch (i) {
             case 1:
                 puts("请输入您的卡号：");
