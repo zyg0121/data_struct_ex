@@ -1,2 +1,2 @@
 # data_struct_ex
-sduwh se data struct execrice
+sduwh software engineering data struct execrice

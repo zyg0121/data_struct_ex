@@ -114,48 +114,41 @@ bool QueueTraverse(LinkQueue Q, void (Visit)(QElemType)) {
 void menu1() {
 	puts("1.insert");
 	puts("2.delete");
-	puts("3.find");
-	puts("4.print");
+	puts("3.print");
 	puts("0.exit");
+}
+
+void PrintElem(QElemType e) {
+    cout<<e;
 }
 
 int main() {
     LinkQueue str;
     puts("Start initialization...");
     InitQueue(&str);
-
+    puts("Please enter the number of the char in the string:");
+    int n;cin>>n;
+    char tmp;
+    for(int i=1;i<=n;i++) {
+        cin>>tmp;
+        EnQueue(&str,tmp);
+    }
     int order1;
 	menu1();
 	cin>>order1;
     while(order1!=0) {
 		if (order1 >= 1 && order1 <= 4) {
 				if (order1 == 1) {
-					int i;
-					puts("Please enter the pos do you want insert:");
-					cin>>i;
-					printf("Please enter the char\n");
-                    /*string e;
-                    cin>>e;
-                    str.insert(i,e);
-                    cout<<str<<endl;*/
+					printf("Please enter the char do you want to insert\n");
+                    char ch;cin>>ch;
+                    EnQueue(&str,ch);
 				}
 				else if (order1 == 2) {
-					int i;
-					puts("Please enter the pos do you want delete:");
-					cin >> i;
-					/*str.erase(i);
-                    cout<<str<<endl;*/
+					char ch;
+                    DeQueue(&str,&ch);
 				}
 				else if (order1 == 3) {
-					int i;
-					puts("Please enter the pos do you want to find");
-					cin>>i;
-                    /*i--;
-                    string tmp=str.substr(i,1);
-					cout<<"The char is "<<tmp;*/
-				}
-				else if (order1 == 4) {
-					/*cout<<str;*/
+					QueueTraverse(str,PrintElem);
 				}
 				else {
 					puts("ERROR input");
