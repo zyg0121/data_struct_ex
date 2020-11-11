@@ -4,6 +4,7 @@
 #include <cstdlib> 
 using namespace std;
 
+//采用栈管理字符串
 const int STACK_INIT_SIZE = 100;
 const int STACKINCREMENT = 10;
 
