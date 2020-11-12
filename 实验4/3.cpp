@@ -42,7 +42,7 @@ int main() {
 					int i;
 					puts("Please enter the pos do you want delete:");
 					cin >> i;
-					str.erase(i);
+					str.erase(i,1);
                     cout<<str<<endl;
 				}
 				else if (order1 == 3) {

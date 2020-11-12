@@ -129,6 +129,7 @@ int main() {
     puts("Please enter the number of the char in the string:");
     int n;cin>>n;
     char tmp;
+    puts("Please enter the string:");
     for(int i=1;i<=n;i++) {
         cin>>tmp;
         EnQueue(&str,tmp);
@@ -142,10 +143,12 @@ int main() {
 					printf("Please enter the char do you want to insert\n");
                     char ch;cin>>ch;
                     EnQueue(&str,ch);
+                    QueueTraverse(str,PrintElem);
 				}
 				else if (order1 == 2) {
 					char ch;
                     DeQueue(&str,&ch);
+                    QueueTraverse(str,PrintElem);
 				}
 				else if (order1 == 3) {
 					QueueTraverse(str,PrintElem);

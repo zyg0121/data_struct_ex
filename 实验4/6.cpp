@@ -67,10 +67,10 @@ int main() {
 					Output();
 				}
 				else if (order1 == 3) {
-					char i;
+					int i;
 					puts("Please enter the pos do you want to find");
 					cin>>i;
-					cout<<str[i];
+					cout<<str[i]<<endl;
 				}
 				else if (order1 == 4) {
 					Output();
