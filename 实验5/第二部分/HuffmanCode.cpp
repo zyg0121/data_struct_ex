@@ -89,7 +89,15 @@ int main() {
     cin>>n;
     puts("Please enter the name and grade of the students:");
     for(int i = 0;i < n;i++) {
-        cin>>code[i].ch>>code[i].grade;
+        int grade;
+        cin>>code[i].ch;
+        cin>>grade;
+        if(grade > 0 && grade <=100) 
+            code[i].grade = grade;
+        else {
+            puts("The grade is not in 0 ~ 100, please try again");
+            i--;
+        }
         node[i].fa = NULL;
         node[i].lc = node[i].rc =NULL;
     }
