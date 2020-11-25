@@ -429,6 +429,7 @@ void PrintTree(SqBiTree T) {
         }
         printf("\n");
     }
+    putchar(10);
 }
 
 

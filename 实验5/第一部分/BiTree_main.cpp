@@ -29,12 +29,12 @@ int main() {
     puts("初始化空二叉树T...");
     InitBiTree(T);
     puts("按先序序列建立二叉树...");
-    CreateBiTree(T, "NULL");
-    int n = 0;
+    CreateBiTree(T, "TestData_Pre.txt");
+    int n;
     while(true) {
+        menu();
         cin>>n;
         if(n==12) return 0;
-        menu();
         TElemType e;
         TElemType p1;
         int pos;
@@ -43,13 +43,19 @@ int main() {
             PrintTree(T);
             break;
         case 1:
+            puts("前序遍历结果:");
             PreOrderTraverse(T, PrintElem);
+            putchar(10);
             break;
         case 2:
+            puts("中序遍历结果:");
             InOrderTraverse(T, PrintElem);
+            putchar(10);
             break;
         case 3:
+            puts("后序遍历结果:");
             PostOrderTraverse(T, PrintElem);
+            putchar(10);
             break;
         case 4:
             printf("二叉树 T 的深度为：%d \n", BiTreeDepth(T));
