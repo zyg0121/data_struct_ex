@@ -11,7 +11,6 @@ using namespace std;
 class HuffmanCode {
     public :
         string ch;
-        int grade;
         deque<int> Huffcode;
 };
 
@@ -70,9 +69,9 @@ void Huff_code(HuffmanNode *node,HuffmanCode *code,int n) {
     }
 }
 
-void Huff_print(HuffmanCode *code,int n) {
+void Huff_print(HuffmanCode *code,HuffmanNode *node,int n) {
     for(int i = 0;i < n;i++) {
-        cout<<code[i].ch<<" 's grade is:"<<code[i].grade<<" and Huffman code is:";
+        cout<<code[i].ch<<" 's grade is:"<<node[i].w<<" and Huffman code is:";
         for(deque<int>::iterator it = code[i].Huffcode.begin();it != code[i].Huffcode.end();it++) 
             cout<<*it;
         putchar(10);
@@ -93,7 +92,7 @@ int main() {
         cin>>code[i].ch;
         cin>>grade;
         if(grade > 0 && grade <=100) 
-            code[i].grade = grade;
+            node[i].w = grade;
         else {
             puts("The grade is not in 0 ~ 100, please try again");
             i--;
@@ -108,7 +107,7 @@ int main() {
     
     Huff_init(pq,n);
     Huff_code(node,code,n);
-    Huff_print(code,n);
+    Huff_print(code,node,n);
     
     return 0;
 }

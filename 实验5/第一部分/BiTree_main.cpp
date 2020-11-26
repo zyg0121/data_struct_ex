@@ -33,6 +33,7 @@ int main() {
     int n;
     while(true) {
         menu();
+        puts("请输入操作:");
         cin>>n;
         if(n==12) return 0;
         TElemType e;
@@ -40,6 +41,7 @@ int main() {
         int pos;
         switch (n) {
         case 0:
+            puts("树的结构如下:");
             PrintTree(T);
             break;
         case 1:
