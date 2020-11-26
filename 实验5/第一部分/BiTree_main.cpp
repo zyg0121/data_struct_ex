@@ -91,7 +91,7 @@ int main() {
             cin>>p1;
             puts("创建子树 c1 ...");
             InitBiTree(c1);
-            CreateBiTree(c1, "NULL");
+            CreateBiTree(c1, "TestData_c1.txt");
             PrintTree(c1);
             puts("选择插入左子树or右子树:");
             puts("0.左子树\n1.右子树");
