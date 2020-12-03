@@ -1073,6 +1073,10 @@ static void Create(PTree *T, FILE *fp)
 
             printf("请依次输入 %c 的孩子结点，不存在孩子时输入一个^：", T->nodes[e].data);
             scanf("%s", s);
+            /*if(strlen(s)>=3) {
+                printf("存在超生现象！请重新输入");
+                continue;
+            }*/
             for (i = 0; i < strlen(s); i++)
             {
                 if (s[i] == '^')
@@ -1115,6 +1119,11 @@ static void Create(PTree *T, FILE *fp)
             // 录入孩子结点
             ReadData(fp, "%s", s);
             printf("%s\n", s);
+
+            /*if(strlen(s)>=3) {
+                printf("存在超生现象！请重新输入\n");
+                continue;
+            }*/
 
             DeQueue(&Q, &e); // 父结点位置出队
 
