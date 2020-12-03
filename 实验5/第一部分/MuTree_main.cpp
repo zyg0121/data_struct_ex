@@ -21,9 +21,8 @@ void menu()
     puts("8.输出儿子");
     puts("9.增加子树");
     puts("10.删除子树");
-    puts("11.删除单个节点");
-    puts("12.清空树");
-    puts("13.退出程序");
+    puts("11.清空树");
+    puts("12.退出程序");
 }
 
 int main(int argc, char *argv[])
@@ -40,7 +39,7 @@ int main(int argc, char *argv[])
         menu();
         puts("请输入操作:");
         scanf("%d", &n);
-        if (n == 13)
+        if (n == 12)
             return 0;
         TElemType e;
         TElemType p1;
@@ -88,7 +87,7 @@ int main(int argc, char *argv[])
             int i;
             puts("请输入要查找的第i个儿子");
             cin >> i;
-            printf("结点 %c 的第 %d 孩子结点值为：%c\n", e, i, ChildCount(T, i));
+            printf("结点 %c 的第 %d 孩子结点值为：%c\n", e, i, Child(T, e, i));
             break;
         case 9:
             PTree c1;
@@ -114,11 +113,6 @@ int main(int argc, char *argv[])
             PrintTree(T);
             break;
         case 11:
-            puts("请输入要删除的叶子点");
-            cin >> e;
-            Assign(&T, e, '^');
-            PrintTree(T);
-        case 12:
             ClearTree(&T);
             TreeEmpty(T) ? printf("T 为空！\n") : printf("T 不为空！\n");
             break;
